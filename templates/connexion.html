@@ -5,6 +5,18 @@
     <title>Page de connexion</title>
   </head>
   <body> 
+    <h1>Se connecter</h1>
+    <form action="" method="get">
+        <div>
+            <label for="pseudo"> Pseudo : </label>
+            <input type="text" name="pseudo" id="pseudo" required>
+        </div>
+        <div>
+            <label for="password"> Mot de passe : </label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <input type="submit" value="se connecter">
+    </form>
     <h1>Créer son compte</h1>
         <form action="" method="get">
             <div>
@@ -27,6 +39,11 @@
                 <label for="pseudo"> Pseudo : *</label>
                 <input type="text" name="pseudo" id="pseudo" required>
             </div>
+            <div>
+                <label for="password"> Mot de passe : </label>
+                <input type="password" name="password" id="password" minlength="6" required>
+            </div>
+            <input type="submit" value="creer">
         </form>
   </body>
 
