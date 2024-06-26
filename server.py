@@ -18,13 +18,18 @@ CORS(app)
 def accueil():
     return '<p> coucou accueil <p>'
 
-@app.route("/connexion")
+@app.route("/connexion", methods=['GET','POST'])
 def connexion():
+
+
     return render_template('connexion.html')
 
 # @app.route("/joueur")
 # def getdrop():
 #     return model.getdrop()
 
+
+def form_info(nom, prenom, naissance, nationalite, pseudo, password):
+    sql = "INSERT INTO JOUEUR(nom des champs) VALUES (%s,%s,%s,%s,%s,%s)"
 
 
