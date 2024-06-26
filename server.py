@@ -23,8 +23,6 @@ def get_data():
     return model.get_data()
 
 
-def form_info(nom, prenom, naissance, nationalite, pseudo, password):
-    sql = "INSERT INTO JOUEUR(nom des champs) VALUES (%s,%s,%s,%s,%s,%s)"
-    return sql
+
 
 

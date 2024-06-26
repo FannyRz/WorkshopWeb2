@@ -23,13 +23,13 @@ def jsonify_a_cursor(cursor):
     # Retour des résultats en JSON
     return jsonify(results)
 
-def get_data():
+def get_data(requete):
     # Connexion à la base de données
     conn = mysql.connector.connect(**mydb)
     cursor = conn.cursor()
 
     # Exécution de la requête
-    cursor.execute("SELECT * FROM SUDOKU")
+    cursor.execute(requete)
 
     result = jsonify_a_cursor(cursor)
 
@@ -37,3 +37,6 @@ def get_data():
     conn.close()
 
     return result
+
+def form_info(nom, prenom, naissance, nationalite, pseudo, password):
+    return get_data("INSERT INTO JOUEUR(nom des champs) VALUES (%s,%s,%s,%s,%s,%s)") 
