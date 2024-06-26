@@ -47,10 +47,28 @@ def form_info(nom, prenom, naissance, nationalite, pseudo, password):
     conn = mysql.connector.connect(**mydb)
     cursor = conn.cursor()
 
-    joueur_actif = cursor.get_data("SELECT id_joueur FROM JOUEUR order by id_joueur desc limit 1")
+    # joueur_actif = cursor.get_data("SELECT id_joueur FROM JOUEUR order by id_joueur desc limit 1")
+
 
     # Exécution de la requête
-    cursor.execute("INSERT INTO JOUEUR(id_joueur, pseudo,nom,prenom,date_creation,nationalite,date_naissance,score,mot_de_passe) VALUES (0,%s,%s,%s,24/20/20,%s,%s,0,%s)")
+    cursor.execute("INSERT INTO JOUEUR(id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (3,%s,%s,%s,'2024-06-26',%s,%s,0,%s)", (pseudo, nom, prenom,  nationalite, naissance, password,))
+    conn.commit()
+    
+    cursor.close()
+    conn.close()
+
+def debug() :
+    # Connexion à la base de données
+    conn = mysql.connector.connect(**mydb)
+    cursor = conn.cursor()
+
+    # Exécution de la requête
+    cursor.execute("SELECT * FROM JOUEUR")
+
+    # result = jsonify_a_cursor(cursor)
+    rows = cursor.fetchall()
 
     cursor.close()
     conn.close()
+
+    return rows

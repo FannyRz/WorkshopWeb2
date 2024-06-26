@@ -36,17 +36,6 @@ def accueil():
 
 @app.route("/connexion", methods=['GET','POST'])
 def connexion():
-    if (request.method == 'POST'):
-        nom_res = request.form['nom']
-        prenom_res = request.form['prenom']
-        naissance_res = request.form['naissance']
-        nationalite_res = request.form['nationalite']
-        pseudo_res = request.form['pseudo']
-        password_res = request.form['password']
-    #     #enregistrer un mot de passe hasher 
-    #     password_reshash = model.hash_psw(request.form['password'])
-    #     model.form_info(nom_res,prenom_res,naissances_res,nationalite_res,pseudo_res,password_reshash)
-    #     return render_template("connexion.html")
 
     # if (request.method == 'POST'):
     #     pseudo_actif = request.form['pseudo']
@@ -79,7 +68,18 @@ def profil():
 
 @app.route("/inscription", methods=['GET','POST'])
 def inscription():
-
+    if (request.method == 'POST'):
+        nom_res = request.form['nom']
+        prenom_res = request.form['prenom']
+        naissance_res = request.form['naissance']
+        nationalite_res = request.form['nationalite']
+        pseudo_res = request.form['pseudo']
+        password_res = request.form['password']
+    #     #enregistrer un mot de passe hasher 
+    #     password_reshash = model.hash_psw(request.form['password'])
+        model.form_info(nom_res,prenom_res,naissance_res,nationalite_res,pseudo_res,password_res)
+    #     return render_template("connexion.html")
+        return render_template("connexion.html", create_account_message= model.debug())
     return render_template("connexion.html")
 
 @app.route("/sudoku")
