@@ -38,5 +38,18 @@ def get_data(requete):
 
     return result
 
+def hash_psw(psw):
+   return hashlib.sha256(str(psw).encode('utf-8')).hexdigest()
+
 def form_info(nom, prenom, naissance, nationalite, pseudo, password):
-    return get_data("INSERT INTO JOUEUR(nom des champs) VALUES (%s,%s,%s,%s,%s,%s)") 
+    # Connexion à la base de données
+    conn = mysql.connector.connect(**mydb)
+    cursor = conn.cursor()
+
+    joueur_actif = cursor.get_data("SELECT id_joueur FROM JOUEUR order by id_joueur desc limit 1")
+
+    # Exécution de la requête
+    cursor.execute("INSERT INTO JOUEUR(id_joueur, pseudo,nom,prenom,date_creation,nationalite,date_naissance,score,mot_de_passe) VALUES (0,%s,%s,%s,24/20/20,%s,%s,0,%s)")
+
+    cursor.close()
+    conn.close()
