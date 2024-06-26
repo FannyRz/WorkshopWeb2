@@ -20,6 +20,15 @@ def accueil():
 
 @app.route("/connexion", methods=['GET','POST'])
 def connexion():
+    if (request.method == 'POST'):
+        nom_res = request.form['nom']
+        prenom_res = request.form['prenom']
+        naissance_res = request.form['naissance']
+        nationalite_res = request.form['nationalite']
+        pseudo_res = request.form['pseudo']
+        password_res = request.form['password']
+        
+
 
 
     return render_template('connexion.html')
