@@ -36,13 +36,13 @@ def accueil():
 
 @app.route("/connexion", methods=['GET','POST'])
 def connexion():
-    # if (request.method == 'POST'):
-    #     nom_res = request.form['nom']
-    #     prenom_res = request.form['prenom']
-    #     naissance_res = request.form['naissance']
-    #     nationalite_res = request.form['nationalite']
-    #     pseudo_res = request.form['pseudo']
-
+    if (request.method == 'POST'):
+        nom_res = request.form['nom']
+        prenom_res = request.form['prenom']
+        naissance_res = request.form['naissance']
+        nationalite_res = request.form['nationalite']
+        pseudo_res = request.form['pseudo']
+        password_res = request.form['password']
     #     #enregistrer un mot de passe hasher 
     #     password_reshash = model.hash_psw(request.form['password'])
     #     model.form_info(nom_res,prenom_res,naissances_res,nationalite_res,pseudo_res,password_reshash)
