@@ -9,6 +9,8 @@ CORS(app)
 import json
 import requests
 
+pseudo_actif = ""
+
 def json_to_json_string(json_string):
     """
     Transforme une chaîne JSON en une autre chaîne JSON après l'avoir convertie en dictionnaire.
@@ -26,9 +28,6 @@ def json_to_json_string(json_string):
     except json.JSONDecodeError as e:
         print(f"Erreur lors de la transformation du JSON: {e}")
         return None
-
-
-pseudo_actif = ""
 
 @app.route("/")
 def accueil():
@@ -85,6 +84,15 @@ def inscription():
 @app.route("/sudoku")
 def get_data():
     return model.get_data("SELECT * FROM SUDOKU")
+
+@app.route("/supprimer")
+def supprimer():
+    model.supprimer(pseudo_actif)
+    # pseudo_actif = ""
+    # return render_template("connexion.html")
+    return pseudo_actif
+
+
 
 
 

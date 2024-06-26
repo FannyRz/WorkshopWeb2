@@ -54,3 +54,14 @@ def form_info(nom, prenom, naissance, nationalite, pseudo, password):
 
     cursor.close()
     conn.close()
+
+def supprimer(pseudo):
+    # Connexion à la base de données
+    conn = mysql.connector.connect(**mydb)
+    cursor = conn.cursor()
+
+    # Exécution de la requête
+    cursor.execute("DELETE FROM JOUEUR %s", (pseudo,))
+
+    cursor.close()
+    conn.close()
