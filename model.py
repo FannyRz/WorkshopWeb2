@@ -1,6 +1,6 @@
 import mysql.connector
 from flask import jsonify
-
+import hashlib
 
 
 mydb = {
@@ -23,20 +23,21 @@ def jsonify_a_cursor(cursor):
     # Retour des résultats en JSON
     return jsonify(results)
 
-def get_data(requete):
+def get_data(requete, profile_name):
     # Connexion à la base de données
     conn = mysql.connector.connect(**mydb)
     cursor = conn.cursor()
 
     # Exécution de la requête
-    cursor.execute(requete)
+    cursor.execute(requete,(profile_name,))
 
-    result = jsonify_a_cursor(cursor)
+    # result = jsonify_a_cursor(cursor)
+    rows = cursor.fetchall()
 
     cursor.close()
     conn.close()
 
-    return result
+    return rows
 
 def hash_psw(psw):
    return hashlib.sha256(str(psw).encode('utf-8')).hexdigest()
