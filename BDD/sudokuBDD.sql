@@ -73,7 +73,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `sudokuDB`.`SESSION` (
   `id_session` INT NOT NULL,
   `nbr_erreur` INT NULL,
-  `temps` DATETIME NOT NULL,
+  `temps` TIME NOT NULL,
   `id_jour` INT NOT NULL,
   `id_sudoku` INT NOT NULL,
   PRIMARY KEY (`id_session`),
@@ -96,4 +96,16 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-INSERT INTO SUDOKU (id_sudoku, difficulte, case_init) VALUES (0,2,"ahebdks");
+INSERT INTO SUDOKU (id_sudoku, difficulte, case_init) VALUES (0,6,"A3:5,A4:3,A6:9,A7:4,A9:7,B9:5,C3:4,C6:8,C9:6,D1:8,D3:2,D4:9,D5:3,D6:6,E2:3,E6:4,E8:5,F1:7,F3:1,F6:5,G4:5,G5:8,G6:2,G8:3,G9:9,H3:8,H6:3,H8:4,I2:9,I3:6,I4:4,I7:5,I9:8");
+
+
+INSERT INTO JOUEUR (id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (0, "Lililica", "TERRASSON", "Lucas", '2024-06-26', "France", '2003-07-05', 500, "root");
+INSERT INTO JOUEUR (id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (1, "Nyny", "RUIZ", "Fanny", '2024-06-26', "France", '2003-09-24', 1560, "root2");
+INSERT INTO JOUEUR (id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (2, "Xx_Gamer_xX", "RONALD", "McDonald", '2022-01-07', "Spain", '1989-12-15', 10196, "McDO965*B9");
+
+
+INSERT INTO JOUR (id_jour, date, id_joueur) VALUES (0, '2024-06-2024', 0);
+INSERT INTO JOUR (id_jour, date, id_joueur) VALUES (1, '2024-07-2024', 0);
+
+INSERT INTO SESSION (id_session, nbr_erreur, temps, id_jour, id_sudoku) VALUES (0, 4, '00:30:12', 0, 0);
+INSERT INTO SESSION (id_session, nbr_erreur, temps, id_jour, id_sudoku) VALUES (0, 2, '00:27:32', 0, 0);

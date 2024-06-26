@@ -20,7 +20,7 @@ def connexion():
 
 @app.route('/sudoku')
 def get_data():
-    return model.get_data()
+    return model.get_data("SELECT * FROM SUDOKU")
 
 
 
