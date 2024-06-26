@@ -71,9 +71,11 @@ def profil():
     # password_reshash = model.hash_psw(request.form['password'])
     password_res = request.form['password']
     joueur_bdd = model.get_data("SELECT mot_de_passe FROM JOUEUR WHERE pseudo=%s", pseudo_actif)
-    if(password_res == joueur_bdd[0][0]) :
-        return render_template("profil.html", nom = pseudo_actif)
-    return render_template("connexion.html", mdp_erreur = "Mot de passe incorrecte !")
+    if (joueur_bdd != []) :
+        if(password_res == joueur_bdd[0][0]) :
+            return render_template("profil.html", nom = pseudo_actif)
+        return render_template("connexion.html", mdp_erreur = "Mot de passe incorrecte !")
+    return render_template("connexion.html", mdp_erreur = "Identifiant incorrecte !")
 
 @app.route("/inscription", methods=['GET','POST'])
 def inscription():
