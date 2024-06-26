@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
 from flask import Flask,request,render_template,jsonify,abort
 from flask_cors import CORS
-import mysql.connector
+import model
 
 app = Flask(__name__)
 CORS(app)
 
-# mydb=mysql.connector.connect("")
 
-# mycursor=mydb.cursor()
-
-# def getdrop():
-#     response = mycursor.execute("select * from joueur ")
-#     return response.fetchall()
 
 @app.route("/")
 def accueil():
@@ -24,9 +18,9 @@ def connexion():
 
     return render_template('connexion.html')
 
-# @app.route("/joueur")
-# def getdrop():
-#     return model.getdrop()
+@app.route('/sudoku')
+def get_data():
+    return model.get_data()
 
 
 def form_info(nom, prenom, naissance, nationalite, pseudo, password):
