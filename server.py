@@ -75,7 +75,7 @@ def inscription():
         pseudo_res = request.form['pseudo']
         password_res = request.form['password']
     #     #enregistrer un mot de passe hasher 
-    #     password_reshash = model.hash_psw(request.form['password'])
+        # password_reshash = model.hash_psw(request.form['password'])
         model.form_info(nom_res,prenom_res,naissance_res,nationalite_res,pseudo_res,password_res)
     #     return render_template("connexion.html")
         return render_template("connexion.html", create_account_message= model.debug())
