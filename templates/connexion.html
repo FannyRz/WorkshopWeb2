@@ -53,28 +53,29 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <h1>Créer son compte</h1>
         <form action="inscription" method="post">
             <div>
-                <label for="nom"> Nom : *</label>
-                <input type="text" name="nom" id="name" required>
+                <label for="nom"> Nom : </label>
+                <input type="text" name="nom" id="name">
             </div>
             <div>
-                <label for="prenom"> Prenom : *</label>
-                <input type="text" name="prenom" id="prenom" required>
+                <label for="prenom"> Prenom : </label>
+                <input type="text" name="prenom" id="prenom">
             </div>
             <div>
-                <label for="naissance"> Date de naissance : </label>
+                <label for="naissance"> Date de naissance : *</label>
                 <input type="date" name="naissance" id="naissance" >
             </div>
             <div>
                 <label for="nationalite"> Nationalité : *</label>
-                <input type="text" name="nationalite" id="nationalite" >
+                <input type="text" name="nationalite" id="nationalite" required>
             </div>
             <div>
                 <label for="pseudo"> Pseudo : *</label>
                 <input type="text" name="pseudo" id="pseudo" required>
             </div>
             <div>
-                <label for="password"> Mot de passe : </label>
-                <input type="password" name="password" id="password" minlength="6" required>
+                <label for="password"> Mot de passe : * (entre 5 et 10 charactères)</label>
+                <input type="password" name="password" id="password" minlength="5" maxlength="10" required>
+            
             </div>
             <input type="submit" value="creer">
         </form>

@@ -56,11 +56,11 @@ def profil():
     model.pseudo_actif = request.form['pseudo']
 
     #enregistrer un mot de passe hasher 
-    # password_reshash = model.hash_psw(request.form['password'])
-    password_res = request.form['password']
+    password_reshash = model.hash_psw(request.form['password'])
+    
     joueur_bdd = model.get_data("SELECT mot_de_passe FROM JOUEUR WHERE pseudo=%s", model.pseudo_actif)
     if (joueur_bdd != []) :
-        if(password_res == joueur_bdd[0][0]) :
+        if(password_reshash == joueur_bdd[0][0]) :
             return render_template("profil.html", nom = model.pseudo_actif)
         return render_template("connexion.html", mdp_erreur = "Mot de passe incorrecte !")
     return render_template("connexion.html", mdp_erreur = "Identifiant incorrecte !")
@@ -75,9 +75,9 @@ def inscription():
         pseudo_res = request.form['pseudo']
         password_res = request.form['password']
     #     #enregistrer un mot de passe hasher 
-        # password_reshash = model.hash_psw(request.form['password'])
-        model.form_info(nom_res,prenom_res,naissance_res,nationalite_res,pseudo_res,password_res)
-    #     return render_template("connexion.html")
+        password_reshash = model.hash_psw(request.form['password'])
+        model.form_info(nom_res,prenom_res,naissance_res,nationalite_res,pseudo_res,password_reshash)
+        # return password_reshash
         return render_template("connexion.html", create_account_message= model.debug())
     return render_template("connexion.html")
 
