@@ -91,8 +91,22 @@ def supprimer():
     model.pseudo_actif = ""
     return render_template("connexion.html", create_account_message= model.debug(), pseudo_actif_debug=model.pseudo_actif)
 
-
-
+@app.route("/mdp_oublie", methods=['GET', 'POST'])
+def mdp_oublie():
+    if (request.method == 'POST'):
+        pseudo_res = request.form['pseudo']
+        new_password_res = request.form['new_password']
+        new_password_verif_res = request.form['new_password_verif']
+        joueur_bdd = model.get_data("SELECT * FROM JOUEUR WHERE pseudo=%s", pseudo_res)
+        if( joueur_bdd != []):
+            if(new_password_res != new_password_verif_res):
+                return render_template("mot_de_passe_oublie.html", mdp_erreur="Erreur dans la saisie du mot de passe")
+            new_password_hash = model.hash_psw(new_password_verif_res)
+            model.mdp_oublie(pseudo_res,new_password_hash)
+            return render_template("connexion.html", mdp_erreur = "Mot de passe modifié avec succès")
+        else:
+            return render_template("mot_de_passe_oublie.html", mdp_erreur = "Pseudo introuvé !")
+    return render_template("mot_de_passe_oublie.html")
 
 
 

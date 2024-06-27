@@ -70,6 +70,18 @@ def supprimer(pseudo):
     cursor.close()
     conn.close()
 
+def mdp_oublie(pseudo, new_password):
+    # Connexion à la base de données
+    conn = mysql.connector.connect(**mydb)
+    cursor = conn.cursor()
+
+    # Exécution de la requête
+    cursor.execute("UPDATE joueur SET mot_de_passe = %s WHERE pseudo= %s", (new_password,pseudo,))
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
 def debug() :
     # Connexion à la base de données
     conn = mysql.connector.connect(**mydb)
