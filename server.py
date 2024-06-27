@@ -93,7 +93,7 @@ def inscription():
         password_reshash = model.hash_psw(request.form['password'])
         model.form_info(nom_res,prenom_res,naissance_res,nationalite_res,pseudo_res,password_reshash)
         # return password_reshash
-        return render_template("connexion.html", create_account_message= model.debug())
+        return render_template("connexion.html", create_account_message="Compte créé !")
     return render_template("connexion.html")
 
 @app.route("/sudoku")
