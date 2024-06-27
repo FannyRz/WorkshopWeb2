@@ -36,30 +36,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <!-- Header -->
 <header class="w3-container w3-red w3-center" style="padding:128px 16px">
     <h1>Ajouter une session :</h1>
-    <form action="inscription" method="post">
+    <form action="profiladdsession" method="post">
         <div>
-            <label for="nom"> Nom : *</label>
-            <input type="text" name="nom" id="name" required>
+            <label for="date_session"> Date : *</label>
+            <input type="date" name="date_session" id="date_session" required>
         </div>
         <div>
-            <label for="prenom"> Prenom : *</label>
-            <input type="text" name="prenom" id="prenom" required>
+            <label for="temps"> Temps : *</label>
+            <input type="time" name="temps" id="temps" required>
         </div>
         <div>
-            <label for="naissance"> Date de naissance : </label>
-            <input type="date" name="naissance" id="naissance" >
+            <label for="erreur"> Nombre d'erreur : </label>
+            <input type="number" name="erreur" id="erreur" >
         </div>
         <div>
-            <label for="nationalite"> Nationalité : *</label>
-            <input type="text" name="nationalite" id="nationalite" >
-        </div>
-        <div>
-            <label for="pseudo"> Pseudo : *</label>
-            <input type="text" name="pseudo" id="pseudo" required>
-        </div>
-        <div>
-            <label for="password"> Mot de passe : </label>
-            <input type="password" name="password" id="password" minlength="6" required>
+            <label for="sudoku"> Id du sudoku : *</label>
+            <input type="number" name="sudoku" id="sudoku" >
         </div>
         <input type="submit" value="creer">
     </form>

@@ -78,8 +78,10 @@ def profil():
     password_reshash = model.hash_psw(request.form['password'])
     
     joueur_bdd = model.get_data("SELECT mot_de_passe FROM JOUEUR WHERE pseudo=%s")
+    model.pseudo_actif = ""
     if (joueur_bdd != []) :
         if(password_reshash == joueur_bdd[0][0]) :
+            model.pseudo_actif = request.form['pseudo']
             return render_template("profil.html", nom = model.pseudo_actif)
         return render_template("connexion.html", mdp_erreur = "Mot de passe incorrecte !")
     return render_template("connexion.html", mdp_erreur = "Identifiant incorrecte !")
@@ -97,8 +99,7 @@ def inscription():
         password_reshash = model.hash_psw(request.form['password'])
         model.form_info(nom_res,prenom_res,naissance_res,nationalite_res,pseudo_res,password_reshash)
         # return password_reshash
-        # return render_template("connexion.html", create_account_message= model.debug())
-        return render_template("connexion.html")
+        return render_template("connexion.html", create_account_message="Compte créé !")
     return render_template("connexion.html")
 
 @app.route("/sudoku")
@@ -131,5 +132,28 @@ def mdp_oublie():
     return render_template("mot_de_passe_oublie.html")
 
 
+@app.route("/addsession")
+def addsession():
+    return render_template("addsession.html")
 
 
+@app.route("/profiladdsession", methods=['GET', 'POST'])
+def profil_addsession():
+    if (request.method == 'POST'):
+        date_res = request.form['date_session']
+        temps_res = request.form['temps']
+        erreur_res = request.form['erreur']
+        sudoku_res = request.form['sudoku']
+        model.input_session_info(date_res,temps_res,erreur_res,sudoku_res)
+        return render_template("profil.html", nom=model.pseudo_actif)
+    return render_template("addsession.html", add_session_message="Mauvaise saisie... Veuillez réessayer !")
+
+
+@app.route("/listsession")
+def listsession():
+    return model.get_session()
+
+@app.route("/profil/<int:id>", methods=['GET','DELETE'])
+def del_session(id):
+    model.del_session(id)
+    return render_template("profil.html", nom=model.pseudo_actif)
