@@ -2,6 +2,8 @@ import mysql.connector
 from flask import jsonify
 import hashlib
 import server
+import random
+import datetime
 
 pseudo_actif = ""
 
@@ -56,10 +58,14 @@ def form_info(nom, prenom, naissance, nationalite, pseudo, password):
     newcursor.close()
     newconn.close()
 
+    #choix d'un score aléatoire
+    score_tmp = random.randint(1, 5000)
 
+    #date du jour de creation
+    aujourd_hui = datetime.date.today()
 
     # Exécution de la requête
-    cursor.execute("INSERT INTO JOUEUR(id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (%s,%s,%s,%s,'2024-06-26',%s,%s,0,%s)", (joueur_actif[0][0]+1,pseudo, nom, prenom,  nationalite, naissance, password,))
+    cursor.execute("INSERT INTO JOUEUR(id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)", (joueur_actif[0][0]+1,pseudo, nom, prenom, aujourd_hui,  nationalite, naissance,score_tmp, password,))
     conn.commit()
     
     cursor.close()

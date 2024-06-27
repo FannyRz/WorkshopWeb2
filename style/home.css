@@ -4,7 +4,7 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd; /* Bordures des cellules */
+    border: 3px solid #ddd; /* Bordures des cellules */
     padding: 8px; /* Espacement interne des cellules */
     text-align: left; /* Alignement du texte */
 }
@@ -16,3 +16,7 @@ th {
 caption {
     font-weight: bold; /* Style pour la légende du tableau */
 }
+
+#first_line{
+    font-weight: bold;
+  }
