@@ -155,3 +155,20 @@ def input_session_info(date, temps, erreur, sudoku):
     
     cursor.close()
     conn.close()
+
+
+def get_session():
+    # Connexion à la base de données
+    conn = mysql.connector.connect(**mydb)
+    cursor = conn.cursor()
+
+    # Exécution de la requête
+    cursor.execute("SELECT id_session, nbr_erreur, date, SESSION.id_joueur, SESSION.id_sudoku FROM SESSION JOIN JOUEUR ON SESSION.id_joueur=JOUEUR.id_joueur WHERE JOUEUR.pseudo=%s",(pseudo_actif,))
+
+    # result = jsonify_a_cursor(cursor)
+    result = jsonify_a_cursor(cursor)
+
+    cursor.close()
+    conn.close()
+
+    return result

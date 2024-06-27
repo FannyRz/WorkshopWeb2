@@ -143,6 +143,6 @@ def profil_addsession():
     return render_template("addsession.html", add_session_message="Mauvaise saisie... Veuillez réessayer !")
 
 
-@app.route("/listsession", methods=['GET', 'POST'])
+@app.route("/listsession")
 def listsession():
-    return 
+    return model.get_session()
