@@ -9,6 +9,7 @@ CORS(app)
 import json
 import requests
 
+debug_var = ""
 
 
 def json_to_json_string(json_string):
@@ -33,8 +34,16 @@ def json_to_json_string(json_string):
 def accueil():
     return render_template("home.html")
 
+@app.route("/deconnecter")
+def deconnecter():
+    model.pseudo_actif = ""
+    return render_template("home.html")
+
 @app.route("/connexion", methods=['GET','POST'])
 def connexion():
+
+    if(model.pseudo_actif != "") :
+        return render_template("profil.html", nom = model.pseudo_actif)
 
     # if (request.method == 'POST'):
     #     pseudo_actif = request.form['pseudo']
@@ -53,12 +62,16 @@ def connexion():
 @app.route("/profil", methods=['GET','POST'])
 def profil():
 
+    if(model.pseudo_actif != "") :
+        return render_template("profil.html", nom = model.pseudo_actif)
+
     model.pseudo_actif = request.form['pseudo']
+
 
     #enregistrer un mot de passe hasher 
     # password_reshash = model.hash_psw(request.form['password'])
     password_res = request.form['password']
-    joueur_bdd = model.get_data("SELECT mot_de_passe FROM JOUEUR WHERE pseudo=%s", model.pseudo_actif)
+    joueur_bdd = model.get_data("SELECT mot_de_passe FROM JOUEUR WHERE pseudo=%s")
     if (joueur_bdd != []) :
         if(password_res == joueur_bdd[0][0]) :
             return render_template("profil.html", nom = model.pseudo_actif)
@@ -78,7 +91,7 @@ def inscription():
         # password_reshash = model.hash_psw(request.form['password'])
         model.form_info(nom_res,prenom_res,naissance_res,nationalite_res,pseudo_res,password_res)
     #     return render_template("connexion.html")
-        return render_template("connexion.html", create_account_message= model.debug())
+        return render_template("connexion.html", create_account_message= debug_var)
     return render_template("connexion.html")
 
 @app.route("/sudoku")
@@ -94,6 +107,14 @@ def supprimer():
 
 
 
+@app.route("/profil/listofsession", methods=['GET', 'POST'])
+def listJson():
+    jsonResult = model.give_json_player_data()
+    return jsonResult
+
+@app.route("/profil/addsession", methods=['GET', 'POST'])
+def addsesion():
+    return render_template("addsession.html")
 
 
 
