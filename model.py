@@ -2,6 +2,7 @@ import mysql.connector
 from flask import jsonify
 import hashlib
 
+pseudo_actif = ""
 
 mydb = {
     'host': 'localhost',
@@ -54,6 +55,18 @@ def form_info(nom, prenom, naissance, nationalite, pseudo, password):
     cursor.execute("INSERT INTO JOUEUR(id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (3,%s,%s,%s,'2024-06-26',%s,%s,0,%s)", (pseudo, nom, prenom,  nationalite, naissance, password,))
     conn.commit()
     
+    cursor.close()
+    conn.close()
+
+def supprimer(pseudo):
+    # Connexion à la base de données
+    conn = mysql.connector.connect(**mydb)
+    cursor = conn.cursor()
+
+    # Exécution de la requête
+    cursor.execute("DELETE FROM JOUEUR WHERE pseudo = %s", (pseudo,))
+    conn.commit()
+
     cursor.close()
     conn.close()
 

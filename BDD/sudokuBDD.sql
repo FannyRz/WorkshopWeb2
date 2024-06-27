@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `sudokuDB`.`JOUEUR` (
   `nationalite` VARCHAR(45) NOT NULL,
   `date_naissance` DATE NULL,
   `score` INT NOT NULL DEFAULT 0,
-  `mot_de_passe` VARCHAR(45) NOT NULL,
+  `mot_de_passe` VARCHAR(80) NOT NULL,
   PRIMARY KEY (`id_joueur`),
   UNIQUE INDEX `id_joueur_UNIQUE` (`id_joueur` ASC) VISIBLE,
   UNIQUE INDEX `pseudo_UNIQUE` (`pseudo` ASC) VISIBLE,

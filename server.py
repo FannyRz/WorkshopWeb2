@@ -9,6 +9,8 @@ CORS(app)
 import json
 import requests
 
+
+
 def json_to_json_string(json_string):
     """
     Transforme une chaîne JSON en une autre chaîne JSON après l'avoir convertie en dictionnaire.
@@ -26,9 +28,6 @@ def json_to_json_string(json_string):
     except json.JSONDecodeError as e:
         print(f"Erreur lors de la transformation du JSON: {e}")
         return None
-
-
-pseudo_actif = ""
 
 @app.route("/")
 def accueil():
@@ -53,15 +52,16 @@ def connexion():
 
 @app.route("/profil", methods=['GET','POST'])
 def profil():
-    pseudo_actif = request.form['pseudo']
+
+    model.pseudo_actif = request.form['pseudo']
 
     #enregistrer un mot de passe hasher 
     # password_reshash = model.hash_psw(request.form['password'])
     password_res = request.form['password']
-    joueur_bdd = model.get_data("SELECT mot_de_passe FROM JOUEUR WHERE pseudo=%s", pseudo_actif)
+    joueur_bdd = model.get_data("SELECT mot_de_passe FROM JOUEUR WHERE pseudo=%s", model.pseudo_actif)
     if (joueur_bdd != []) :
         if(password_res == joueur_bdd[0][0]) :
-            return render_template("profil.html", nom = pseudo_actif)
+            return render_template("profil.html", nom = model.pseudo_actif)
         return render_template("connexion.html", mdp_erreur = "Mot de passe incorrecte !")
     return render_template("connexion.html", mdp_erreur = "Identifiant incorrecte !")
 
@@ -75,7 +75,7 @@ def inscription():
         pseudo_res = request.form['pseudo']
         password_res = request.form['password']
     #     #enregistrer un mot de passe hasher 
-    #     password_reshash = model.hash_psw(request.form['password'])
+        # password_reshash = model.hash_psw(request.form['password'])
         model.form_info(nom_res,prenom_res,naissance_res,nationalite_res,pseudo_res,password_res)
     #     return render_template("connexion.html")
         return render_template("connexion.html", create_account_message= model.debug())
@@ -84,6 +84,14 @@ def inscription():
 @app.route("/sudoku")
 def get_data():
     return model.get_data("SELECT * FROM SUDOKU")
+
+@app.route("/supprimer", methods=['GET', 'POST'])
+def supprimer():
+    model.supprimer(model.pseudo_actif)
+    model.pseudo_actif = ""
+    return render_template("connexion.html", create_account_message= model.debug(), pseudo_actif_debug=model.pseudo_actif)
+
+
 
 
 
