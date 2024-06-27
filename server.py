@@ -32,7 +32,7 @@ pseudo_actif = ""
 
 @app.route("/")
 def accueil():
-    return '<p> coucou accueil <p>'
+    return render_template("home.html")
 
 @app.route("/connexion", methods=['GET','POST'])
 def connexion():
@@ -53,7 +53,6 @@ def connexion():
 
 @app.route("/profil", methods=['GET','POST'])
 def profil():
-
     pseudo_actif = request.form['pseudo']
 
     #enregistrer un mot de passe hasher 
