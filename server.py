@@ -71,7 +71,7 @@ def profil():
     #enregistrer un mot de passe hasher 
     password_reshash = model.hash_psw(request.form['password'])
     
-    joueur_bdd = model.get_data("SELECT mot_de_passe FROM JOUEUR WHERE pseudo=%s", model.pseudo_actif)
+    joueur_bdd = model.get_data("SELECT mot_de_passe FROM JOUEUR WHERE pseudo=%s")
     if (joueur_bdd != []) :
         if(password_reshash == joueur_bdd[0][0]) :
             return render_template("profil.html", nom = model.pseudo_actif)
@@ -110,7 +110,9 @@ def mdp_oublie():
         pseudo_res = request.form['pseudo']
         new_password_res = request.form['new_password']
         new_password_verif_res = request.form['new_password_verif']
-        joueur_bdd = model.get_data("SELECT * FROM JOUEUR WHERE pseudo=%s", pseudo_res)
+        model.pseudo_actif = pseudo_res
+        joueur_bdd = model.get_data("SELECT * FROM JOUEUR WHERE pseudo=%s")
+        model.pseudo_actif = ""
         if( joueur_bdd != []):
             if(new_password_res != new_password_verif_res):
                 return render_template("mot_de_passe_oublie.html", mdp_erreur="Erreur dans la saisie du mot de passe")
