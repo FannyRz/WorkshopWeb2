@@ -124,3 +124,34 @@ def give_json_player_data():
     conn.close()
 
     return result
+
+def input_session_info(date, temps, erreur, sudoku):
+    # Connexion à la base de données
+    conn = mysql.connector.connect(**mydb)
+    cursor = conn.cursor()
+
+    newconn = mysql.connector.connect(**mydb)
+    newcursor = newconn.cursor()
+    newcursor.execute("SELECT id_session FROM SESSION ORDER BY id_session DESC LIMIT 1")
+    joueur_actif = newcursor.fetchall()
+    newcursor.close()
+    newconn.close()
+
+    newconn = mysql.connector.connect(**mydb)
+    newcursor = newconn.cursor()
+    newcursor.execute("SELECT id_joueur FROM JOUEUR WHERE pseudo=%s", (pseudo_actif,))
+    id_list = newcursor.fetchall()
+    newcursor.close()
+    newconn.close()
+
+    idDuJoueur = id_list[0][0]
+
+    # Exécution de la requête
+    if(joueur_actif != []):  
+        cursor.execute("INSERT INTO SESSION(id_session, nbr_erreur, temps, date, id_joueur, id_sudoku) VALUES (%s,%s,%s,%s,%s,%s)", (joueur_actif[0][0]+1,erreur, temps, date,  idDuJoueur, sudoku,))
+    else :
+        cursor.execute("INSERT INTO SESSION(id_session, nbr_erreur, temps, date, id_joueur, id_sudoku) VALUES (0,%s,%s,%s,%s,%s)", (erreur, temps, date,  idDuJoueur, sudoku,))
+    conn.commit()
+    
+    cursor.close()
+    conn.close()

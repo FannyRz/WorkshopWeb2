@@ -126,5 +126,23 @@ def mdp_oublie():
     return render_template("mot_de_passe_oublie.html")
 
 
+@app.route("/addsession")
+def addsession():
+    return render_template("addsession.html")
 
 
+@app.route("/profiladdsession", methods=['GET', 'POST'])
+def profil_addsession():
+    if (request.method == 'POST'):
+        date_res = request.form['date_session']
+        temps_res = request.form['temps']
+        erreur_res = request.form['erreur']
+        sudoku_res = request.form['sudoku']
+        model.input_session_info(date_res,temps_res,erreur_res,sudoku_res)
+        return render_template("profil.html")
+    return render_template("addsession.html", add_session_message="Mauvaise saisie... Veuillez réessayer !")
+
+
+@app.route("/listsession", methods=['GET', 'POST'])
+def listsession():
+    return 
