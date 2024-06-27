@@ -18,6 +18,7 @@
         <input type="submit" value="se connecter">
     </form>
     <p>{{mdp_erreur}}</p>
+    
     <h1>Créer son compte</h1>
         <form action="inscription" method="post">
             <div>
@@ -46,7 +47,9 @@
             </div>
             <input type="submit" value="creer">
         </form>
+
         <p>{{create_account_message}}</p>
+        <p> pseudo_actif : {{pseudo_actif_debug}}</p>
   </body>
 
 </html>
