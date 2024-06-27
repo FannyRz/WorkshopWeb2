@@ -2,6 +2,7 @@ import mysql.connector
 from flask import jsonify
 import hashlib
 
+pseudo_actif = ""
 
 mydb = {
     'host': 'localhost',
@@ -61,7 +62,24 @@ def supprimer(pseudo):
     cursor = conn.cursor()
 
     # Exécution de la requête
-    cursor.execute("DELETE FROM JOUEUR %s", (pseudo,))
+    cursor.execute("DELETE FROM JOUEUR WHERE pseudo = %s", (pseudo,))
+    conn.commit()
 
     cursor.close()
     conn.close()
+
+def debug() :
+    # Connexion à la base de données
+    conn = mysql.connector.connect(**mydb)
+    cursor = conn.cursor()
+
+    # Exécution de la requête
+    cursor.execute("SELECT * FROM JOUEUR")
+
+    # result = jsonify_a_cursor(cursor)
+    rows = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return rows
