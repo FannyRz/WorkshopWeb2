@@ -32,7 +32,7 @@ def json_to_json_string(json_string):
 
 @app.route("/")
 def accueil():
-    return render_template("home.html")
+    return render_template("home.html",debug=model.debug())
 
 @app.route("/deconnecter")
 def deconnecter():

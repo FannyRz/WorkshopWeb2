@@ -120,3 +120,15 @@ def give_json_player_data():
     conn.close()
 
     return result
+
+def best_joueurs():
+    # Connexion à la base de données
+    conn = mysql.connector.connect(**mydb)
+    cursor = conn.cursor()
+
+    # Exécution de la requête
+    cursor.execute("SELECT * FROM JOUEUR ORDER BY score LIMIT 1")
+    conn.commit()
+
+    cursor.close()
+    conn.close()
