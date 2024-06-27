@@ -9,6 +9,7 @@ CORS(app)
 import json
 import requests
 
+debug_var = ""
 
 
 def json_to_json_string(json_string):
@@ -33,8 +34,16 @@ def json_to_json_string(json_string):
 def accueil():
     return render_template("home.html")
 
+@app.route("/deconnecter")
+def deconnecter():
+    model.pseudo_actif = ""
+    return render_template("home.html")
+
 @app.route("/connexion", methods=['GET','POST'])
 def connexion():
+
+    if(model.pseudo_actif != "") :
+        return render_template("profil.html", nom = model.pseudo_actif)
 
     # if (request.method == 'POST'):
     #     pseudo_actif = request.form['pseudo']
@@ -53,7 +62,11 @@ def connexion():
 @app.route("/profil", methods=['GET','POST'])
 def profil():
 
+    if(model.pseudo_actif != "") :
+        return render_template("profil.html", nom = model.pseudo_actif)
+
     model.pseudo_actif = request.form['pseudo']
+
 
     #enregistrer un mot de passe hasher 
     password_reshash = model.hash_psw(request.form['password'])
