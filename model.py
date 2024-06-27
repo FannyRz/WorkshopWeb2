@@ -66,9 +66,9 @@ def form_info(nom, prenom, naissance, nationalite, pseudo, password):
 
     # Exécution de la requête
     if(joueur_actif != []):  
-        cursor.execute("INSERT INTO JOUEUR(id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (%s,%s,%s,%s,'2024-06-26',%s,%s,0,%s)", (joueur_actif[0][0]+1,pseudo, nom, prenom,  nationalite, naissance, password,))
+        cursor.execute("INSERT INTO JOUEUR(id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)", (joueur_actif[0][0]+1,pseudo, nom, prenom, aujourd_hui,  nationalite, naissance, score_tmp, password,))
     else :
-        cursor.execute("INSERT INTO JOUEUR(id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (0,%s,%s,%s,'2024-06-26',%s,%s,0,%s)", (pseudo, nom, prenom,  nationalite, naissance, password,))
+        cursor.execute("INSERT INTO JOUEUR(id_joueur, pseudo, nom, prenom, date_creation, nationalite, date_naissance, score, mot_de_passe) VALUES (0,%s,%s,%s,%s,%s,%s,%s,%s)", (pseudo, nom, prenom, aujourd_hui,  nationalite, naissance, score_tmp, password,))
 
     conn.commit()
     
@@ -190,3 +190,16 @@ def del_session(id) :
 
     cursor.close()
     conn.close()
+
+def best_joueurs():
+    # Connexion à la base de données
+    conn = mysql.connector.connect(**mydb)
+    cursor = conn.cursor()
+
+    # Exécution de la requête
+    cursor.execute("SELECT * FROM JOUEUR ORDER BY score DESC LIMIT 3")
+    rows = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+    return rows
