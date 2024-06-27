@@ -72,8 +72,10 @@ def profil():
     password_reshash = model.hash_psw(request.form['password'])
     
     joueur_bdd = model.get_data("SELECT mot_de_passe FROM JOUEUR WHERE pseudo=%s")
+    model.pseudo_actif = ""
     if (joueur_bdd != []) :
         if(password_reshash == joueur_bdd[0][0]) :
+            model.pseudo_actif = request.form['pseudo']
             return render_template("profil.html", nom = model.pseudo_actif)
         return render_template("connexion.html", mdp_erreur = "Mot de passe incorrecte !")
     return render_template("connexion.html", mdp_erreur = "Identifiant incorrecte !")
