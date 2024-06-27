@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="home.css">
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -75,7 +76,34 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   </div>
   
 </div class=" w3-light-grey ">
-<p class="w3-padding-32"> {{debug}}</p>
+<p class="w3-padding-32"> 
+  <table> 
+    <tr>
+      <td>Classement</td>
+      <td>Pseudo</td>
+      <td>Nationalité</td>
+      <td>Score</td>
+    </tr> 
+  <tr>
+    <td>1er joueur</td>
+    <td>{{pseudo1}}</td>
+    <td>{{nationalite1}}</td>
+    <td> {{score1}}</td>
+  </tr> 
+  <tr>
+    <td>2e joueur</td>
+    <td>{{pseudo2}}</td>
+    <td>{{nationalite2}}</td>
+    <td> {{score2}}</td>
+  </tr> 
+  <tr>
+    <td>3e joueur</td>
+    <td>{{pseudo3}}</td>
+    <td>{{nationalite3}}</td>
+    <td> {{score3}}</td>
+  </tr> 
+  </table>
+</p>
 </div>
 
 

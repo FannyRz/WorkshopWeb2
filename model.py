@@ -127,8 +127,9 @@ def best_joueurs():
     cursor = conn.cursor()
 
     # Exécution de la requête
-    cursor.execute("SELECT * FROM JOUEUR ORDER BY score LIMIT 1")
-    conn.commit()
+    cursor.execute("SELECT * FROM JOUEUR ORDER BY score DESC LIMIT 3")
+    rows = cursor.fetchall()
 
     cursor.close()
     conn.close()
+    return rows

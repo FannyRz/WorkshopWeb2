@@ -32,7 +32,13 @@ def json_to_json_string(json_string):
 
 @app.route("/")
 def accueil():
-    return render_template("home.html",debug=model.debug())
+    tab_joueurs = model.best_joueurs()
+    joueur1 = tab_joueurs[0]
+    joueur2 = tab_joueurs[1]
+    joueur3 = tab_joueurs[2]
+    return render_template("home.html",pseudo1 = joueur1[1], nationalite1 = joueur1[5], score1 = joueur1[7],
+    pseudo2 = joueur2[1], nationalite2 = joueur2[5], score2 = joueur2[7],
+    pseudo3 = joueur3[1], nationalite3 = joueur3[5], score3 = joueur3[7], )
 
 @app.route("/deconnecter")
 def deconnecter():
