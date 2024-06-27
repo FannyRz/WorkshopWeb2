@@ -12,7 +12,16 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
+.delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
 </style>
+<script src="{{ url_for('static', filename='js/profil.js') }}"></script>
+
 </head>
 <body>
 
@@ -51,7 +60,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top"> Ajouter une session </button>
       </a>
 
-      <div id="readJsonActivity">
+      <div id="tableau">
 
       </div>
 

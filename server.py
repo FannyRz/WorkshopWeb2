@@ -139,10 +139,15 @@ def profil_addsession():
         erreur_res = request.form['erreur']
         sudoku_res = request.form['sudoku']
         model.input_session_info(date_res,temps_res,erreur_res,sudoku_res)
-        return render_template("profil.html")
+        return render_template("profil.html", nom=model.pseudo_actif)
     return render_template("addsession.html", add_session_message="Mauvaise saisie... Veuillez réessayer !")
 
 
 @app.route("/listsession")
 def listsession():
     return model.get_session()
+
+@app.route("/profil/<int:id>", methods=['GET','DELETE'])
+def del_session(id):
+    model.del_session(id)
+    return render_template("profil.html", nom=model.pseudo_actif)
