@@ -157,3 +157,7 @@ def listsession():
 def del_session(id):
     model.del_session(id)
     return render_template("profil.html", nom=model.pseudo_actif)
+
+@app.route("/sudokuplay")
+def play_sudoku():
+    return render_template("sudoku.html")
