@@ -163,3 +163,7 @@ def listsession():
 def del_session(id):
     model.del_session(id)
     return render_template("profil.html", nom=model.pseudo_actif)
+
+@app.route("/a_propos")
+def info():
+    return render_template("a_propos.html")
