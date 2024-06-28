@@ -167,3 +167,7 @@ def del_session(id):
 @app.route("/a_propos")
 def info():
     return render_template("a_propos.html")
+
+@app.route("/sudokuplay")
+def play_sudoku():
+    return render_template("sudoku.html")
